@@ -1,7 +1,7 @@
 PKGNAME = flat-remix-gtk
 MAINTAINER = Daniel Ruiz de Alegría <daniel@drasite.com>
 UBUNTU_RELEASE = jammy
-PREFIX ?= /usr
+PREFIX ?= ~
 THEMES ?= $(patsubst themes/%/,%,$(wildcard themes/*/))
 
 include src/Makefile.inc
@@ -12,11 +12,11 @@ build:
 	$(MAKE) -C src build
 
 install:
-	mkdir -p $(DESTDIR)$(PREFIX)/share/themes
-	cp -a $(foreach theme,$(THEMES),themes/$(theme)) $(DESTDIR)$(PREFIX)/share/themes
+	mkdir -p $(DESTDIR)$(PREFIX)/.themes
+	cp -a $(foreach theme,$(THEMES),themes/$(theme)) $(DESTDIR)$(PREFIX)/.themes
 
 uninstall:
-	-rm -rf $(foreach theme,$(THEMES),$(DESTDIR)$(PREFIX)/share/themes/$(theme))
+	-rm -rf $(foreach theme,$(THEMES),$(DESTDIR)$(PREFIX)/.themes/$(theme))
 
 _get_version:
 	$(eval VERSION ?= $(shell git show -s --format=%cd --date=format:%Y%m%d HEAD))
